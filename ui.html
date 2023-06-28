@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button id="calculate">Calculate Carbon Footprint</button>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('calculate').onclick = function() {
+      parent.postMessage({ pluginMessage: { type: 'calculate-carbon-footprint' } }, '*')
+    }
+
+    window.onmessage = function(event) {
+      if (event.data.pluginMessage.type === 'result') {
+        document.getElementById('result').textContent = 'Estimated carbon footprint: ' + event.data.pluginMessage.carbonFootprint + 'g CO2';
+      }
+    }
+  </script>
+</body>
+</html>
